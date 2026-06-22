@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>HISA Ad Campaign Worksheet</title>
+  <style>
+    :root {
+      --bg: #f7f4ef;
+      --card: #ffffff;
+      --ink: #1f2933;
+      --muted: #667085;
+      --accent: #246b73;
+      --accent-2: #d8ecea;
+      --line: #d9dee4;
+      --soft: #fbfaf7;
+      --danger: #9f3a38;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #ffffff 100%);
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    .wrap {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 28px 18px 60px;
+    }
+
+    header {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      padding: 28px;
+      box-shadow: 0 14px 40px rgba(31, 41, 51, 0.08);
+      margin-bottom: 18px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header::after {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      right: -90px;
+      top: -100px;
+      background: var(--accent-2);
+      border-radius: 50%;
+      z-index: 0;
+    }
+
+    header > * {
+      position: relative;
+      z-index: 1;
+    }
+
+    .eyebrow {
+      color: var(--accent);
+      font-size: 0.85rem;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1.05;
+    }
+
+    .subtitle {
+      max-width: 690px;
+      color: var(--muted);
+      font-size: 1.05rem;
+      margin: 0;
+    }
+
+    .top-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 22px;
+    }
+
+    button,
+    .button-like {
+      border: 0;
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: var(--accent);
+      color: white;
+      font-weight: 750;
+      cursor: pointer;
+      font-size: 0.95rem;
+      transition: transform 0.1s ease, opacity 0.15s ease;
+    }
+
+    button:hover {
+      opacity: 0.92;
+      transform: translateY(-1px);
+    }
+
+    button.secondary {
+      background: #eef2f3;
+      color: var(--ink);
+      border: 1px solid var(--line);
+    }
+
+    button.ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+    }
+
+    button.danger {
+      background: #fff1f0;
+      color: var(--danger);
+      border: 1px solid #f3c2bf;
+    }
+
+    .note {
+      background: #fff8dc;
+      border: 1px solid #f3e2a3;
+      color: #5b4b10;
+      border-radius: 16px;
+      padding: 14px 16px;
+      margin: 18px 0;
+      font-size: 0.96rem;
+    }
+
+    form {
+      display: grid;
+      gap: 16px;
+    }
+
+    section {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 22px;
+      box-shadow: 0 8px 26px rgba(31, 41, 51, 0.05);
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 14px;
+    }
+
+    .num {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: var(--accent-2);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      flex: 0 0 auto;
+    }
+
+    h2 {
+      margin: 0;
+      font-size: 1.24rem;
+    }
+
+    .small {
+      margin: 3px 0 0;
+      color: var(--muted);
+      font-size: 0.94rem;
+    }
+
+    .grid {
+      display: grid;
+      gap: 14px;
+    }
+
+    @media (min-width: 720px) {
+      .grid.two {
+        grid-template-columns: 1fr 1fr;
+      }
+      .grid.three {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    label.field {
+      display: grid;
+      gap: 6px;
+      font-weight: 700;
+      color: #344054;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    textarea,
+    select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 11px 12px;
+      font: inherit;
+      background: var(--soft);
+      color: var(--ink);
+      outline: none;
+    }
+
+    textarea {
+      min-height: 92px;
+      resize: vertical;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(36, 107, 115, 0.14);
+      background: #ffffff;
+    }
+
+    .check-grid {
+      display: grid;
+      gap: 8px;
+      margin-top: 8px;
+    }
+
+    @media (min-width: 660px) {
+      .check-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+      .check-grid.three {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    .check {
+      display: flex;
+      gap: 9px;
+      align-items: flex-start;
+      background: var(--soft);
+      border: 1px solid var(--line);
+      border-radius: 13px;
+      padding: 10px 11px;
+      font-weight: 600;
+      color: #344054;
+    }
+
+    .check input {
+      margin-top: 4px;
+      accent-color: var(--accent);
+    }
+
+    .inline-help {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 500;
+    }
+
+    .summary-card {
+      background: #102a2f;
+      color: #f4fbfb;
+      border-radius: 20px;
+      padding: 22px;
+      margin-top: 16px;
+      border: 1px solid #17464d;
+    }
+
+    .summary-card h2 {
+      color: white;
+    }
+
+    .summary-card textarea {
+      background: #0b2024;
+      color: #f4fbfb;
+      border-color: #315c62;
+      min-height: 280px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+      font-size: 0.9rem;
+    }
+
+    .footer {
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 22px;
+    }
+
+    .saved {
+      display: none;
+      margin-left: 4px;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .save-status {
+      display: inline-flex;
+      align-items: center;
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-weight: 700;
+      padding: 9px 11px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: #fff;
+    }
+
+    .pill {
+      display: inline-block;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 4px 9px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      background: #fff;
+      margin-top: 10px;
+    }
+
+    @media print {
+      body {
+        background: white;
+      }
+      .top-actions,
+      .summary-card,
+      .note,
+      .footer {
+        display: none !important;
+      }
+      section,
+      header {
+        box-shadow: none;
+        break-inside: avoid;
+      }
+      input,
+      textarea,
+      select {
+        border: 1px solid #999;
+        background: white;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <header>
+      <div class="eyebrow">HISA Study Abroad</div>
+      <h1>Ad Campaign Worksheet</h1>
+      <p class="subtitle">
+        A quick intake form to help shape a practical enrollment campaign. Rough answers are perfectly fine — this is meant to take 10–15 minutes, not become a dissertation with sandals.
+      </p>
+      <div class="top-actions">
+        <button type="button" onclick="generateSummary()">Generate Summary</button>
+        <button type="button" class="secondary" onclick="copySummary()">Copy Summary</button>
+        <button type="button" class="secondary" onclick="downloadText()">Download Answers</button>
+        <button type="button" class="secondary" onclick="downloadBackup()">Download Backup</button>
+        <button type="button" class="secondary" onclick="triggerImport()">Import Backup</button>
+        <button type="button" class="ghost" onclick="window.print()">Print / Save PDF</button>
+        <button type="button" class="danger" onclick="clearForm()">Clear Saved Answers</button>
+        <input id="backupFile" type="file" accept="application/json,.json" style="display:none" />
+        <span id="savedMsg" class="saved">Saved</span>
+        <span id="lastSaved" class="save-status">Autosave ready</span>
+      </div>
+    </header>
+
+    <div class="note">
+      <strong>Instructions:</strong> Fill in what you know. Leave anything blank if unsure. This page autosaves in this browser as you type. When finished, click <strong>Generate Summary</strong>, then <strong>Copy Summary</strong> or <strong>Download Answers</strong> and send them to Alex. For extra safety, click <strong>Download Backup</strong> too.
+    </div>
+
+    <form id="worksheet">
+      <section>
+        <div class="section-head">
+          <div class="num">1</div>
+          <div>
+            <h2>Enrollment Goal</h2>
+            <p class="small">The campaign only needs a small number of successful enrollments to matter.</p>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <label class="field">Current average students per semester
+            <input type="text" name="current_average" value="15–20 students" />
+          </label>
+          <label class="field">Realistic max capacity per semester
+            <input type="text" name="max_capacity" placeholder="e.g., 35–40 students" />
+          </label>
+          <label class="field">Ideal number of students next semester
+            <input type="text" name="ideal_next_semester" placeholder="e.g., 30 students" />
+          </label>
+          <label class="field">Additional students needed for success
+            <input type="text" name="additional_success" placeholder="e.g., 10–15 additional students" />
+          </label>
+        </div>
+
+        <p class="pill">Which term are we trying to fill first?</p>
+        <div class="check-grid">
+          <label class="check"><input type="checkbox" name="target_term" value="Fall semester" /> Fall semester</label>
+          <label class="check"><input type="checkbox" name="target_term" value="Spring semester" /> Spring semester</label>
+          <label class="check"><input type="checkbox" name="target_term" value="Summer program" /> Summer program</label>
+          <label class="check"><input type="checkbox" name="target_term" value="Not sure yet" /> Not sure yet</label>
+        </div>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">2</div>
+          <div>
+            <h2>Student Profile</h2>
+            <p class="small">This helps determine who the ads should target first.</p>
+          </div>
+        </div>
+
+        <p class="pill">Who usually enrolls at HISA?</p>
+        <div class="check-grid three">
+          <label class="check"><input type="checkbox" name="student_profile" value="U.S. college students" /> U.S. college students</label>
+          <label class="check"><input type="checkbox" name="student_profile" value="Art students" /> Art students</label>
+          <label class="check"><input type="checkbox" name="student_profile" value="Liberal arts students" /> Liberal arts students</label>
+          <label class="check"><input type="checkbox" name="student_profile" value="Gap-year students" /> Gap-year students</label>
+          <label class="check"><input type="checkbox" name="student_profile" value="International students" /> International students</label>
+          <label class="check"><input type="checkbox" name="student_profile" value="Students from specific universities" /> Students from specific universities</label>
+        </div>
+
+        <div class="grid two" style="margin-top:14px;">
+          <label class="field">Most common age range
+            <select name="age_range">
+              <option value="">Select one</option>
+              <option>18–20</option>
+              <option>21–23</option>
+              <option>24+</option>
+              <option>Mixed / not sure</option>
+            </select>
+          </label>
+          <label class="field">Other student types
+            <input type="text" name="student_profile_other" placeholder="Optional" />
+          </label>
+        </div>
+
+        <label class="field" style="margin-top:14px;">What types of students seem most excited by HISA?
+          <span class="inline-help">Example: creative students, independent travelers, students tired of traditional campus life, art majors, etc.</span>
+          <textarea name="excited_students"></textarea>
+        </label>
+
+        <label class="field" style="margin-top:14px;">Any schools, departments, or universities that have sent multiple students before?
+          <textarea name="repeat_schools"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">3</div>
+          <div>
+            <h2>Best Selling Points</h2>
+            <p class="small">Pick the strongest 3–5. These become ad angles and landing page copy.</p>
+          </div>
+        </div>
+
+        <div class="check-grid three">
+          <label class="check"><input type="checkbox" name="selling_points" value="Study abroad in Greece" /> Study abroad in Greece</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Living on Paros Island" /> Living on Paros Island</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Small classes" /> Small classes</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Art/studio focus" /> Art/studio focus</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Liberal arts courses" /> Liberal arts courses</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Accreditation / transferable credits" /> Accreditation / transferable credits</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Faculty mentorship" /> Faculty mentorship</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Community feel" /> Community feel</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Housing included" /> Housing included</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Excursions included" /> Excursions included</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="More personal than large study abroad programs" /> More personal than large programs</label>
+          <label class="check"><input type="checkbox" name="selling_points" value="Strong alumni experience" /> Strong alumni experience</label>
+        </div>
+
+        <label class="field" style="margin-top:14px;">Other selling point
+          <input type="text" name="selling_points_other" placeholder="Optional" />
+        </label>
+
+        <label class="field" style="margin-top:14px;">In one sentence, how would you describe HISA to a student?
+          <textarea name="one_sentence"></textarea>
+        </label>
+
+        <label class="field" style="margin-top:14px;">What do students usually say they loved most after attending?
+          <textarea name="student_loved"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">4</div>
+          <div>
+            <h2>Creative Materials</h2>
+            <p class="small">Video and testimonials are probably the highest-leverage ad fuel.</p>
+          </div>
+        </div>
+
+        <div class="grid two">
+          <label class="field">Do we have access to the promo video?
+            <select name="promo_video">
+              <option value="">Select one</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>Dylan is trying to get it</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+          <label class="field">Can we use student interviews/testimonials in ads?
+            <select name="testimonial_permission">
+              <option value="">Select one</option>
+              <option>Yes</option>
+              <option>No</option>
+              <option>Need permission</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+        </div>
+
+        <p class="pill">Good photos/videos available?</p>
+        <div class="check-grid three">
+          <label class="check"><input type="checkbox" name="asset_types" value="Student life" /> Student life</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Housing" /> Housing</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Classrooms/studios" /> Classrooms/studios</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Student artwork" /> Student artwork</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Paros scenery" /> Paros scenery</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Excursions" /> Excursions</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Faculty/staff" /> Faculty/staff</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Alumni testimonials" /> Alumni testimonials</label>
+          <label class="check"><input type="checkbox" name="asset_types" value="Not sure" /> Not sure</label>
+        </div>
+
+        <label class="field" style="margin-top:14px;">Who has access to the best photo/video files?
+          <textarea name="asset_owner"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">5</div>
+          <div>
+            <h2>Website and Follow-Up</h2>
+            <p class="small">Ads only work if leads get captured and followed up with quickly.</p>
+          </div>
+        </div>
+
+        <label class="field">Where should ad traffic go?
+          <select name="traffic_destination">
+            <option value="">Select one</option>
+            <option>HISA homepage</option>
+            <option>Application page</option>
+            <option>Contact/inquiry page</option>
+            <option>A new campaign landing page</option>
+            <option>Not sure</option>
+          </select>
+        </label>
+
+        <div class="grid two" style="margin-top:14px;">
+          <label class="field">Who receives student inquiries right now?
+            <input type="text" name="inquiry_owner" />
+          </label>
+          <label class="field">How quickly can someone respond?
+            <select name="response_time">
+              <option value="">Select one</option>
+              <option>Same day</option>
+              <option>Within 1–2 days</option>
+              <option>Within a week</option>
+              <option>Not sure</option>
+            </select>
+          </label>
+        </div>
+
+        <label class="field" style="margin-top:14px;">Is there a current list/spreadsheet of inquiries or prospective students?
+          <select name="lead_list">
+            <option value="">Select one</option>
+            <option>Yes</option>
+            <option>No</option>
+            <option>Not sure</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">6</div>
+          <div>
+            <h2>Budget Comfort Level</h2>
+            <p class="small">No commitment yet — this just helps shape realistic campaign options.</p>
+          </div>
+        </div>
+
+        <label class="field">What budget range might Barry realistically consider for a test campaign?
+          <select name="budget_range">
+            <option value="">Select one</option>
+            <option>$2,500–$5,000</option>
+            <option>$5,000–$10,000</option>
+            <option>$10,000–$15,000</option>
+            <option>$15,000+</option>
+            <option>Not sure</option>
+          </select>
+        </label>
+
+        <label class="field" style="margin-top:14px;">Would the budget include only ad spend, or also setup/creative work?
+          <select name="budget_scope">
+            <option value="">Select one</option>
+            <option>Ad spend only</option>
+            <option>Ads + creative/video editing</option>
+            <option>Ads + landing page/help with website</option>
+            <option>Not sure</option>
+          </select>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">7</div>
+          <div>
+            <h2>Practical Constraints</h2>
+            <p class="small">This keeps the plan realistic and avoids stepping on landmines.</p>
+          </div>
+        </div>
+
+        <label class="field">Anything Barry definitely does NOT want to do?
+          <span class="inline-help">Example: TikTok, major website changes, expensive consultants, etc.</span>
+          <textarea name="dont_want"></textarea>
+        </label>
+
+        <label class="field" style="margin-top:14px;">Any language, claims, or promises we should avoid in ads?
+          <span class="inline-help">Example: accreditation wording, guaranteed credit transfer, financial aid, etc.</span>
+          <textarea name="claims_to_avoid"></textarea>
+        </label>
+
+        <label class="field" style="margin-top:14px;">Any deadlines we should know?
+          <textarea name="deadlines"></textarea>
+        </label>
+      </section>
+
+      <section>
+        <div class="section-head">
+          <div class="num">8</div>
+          <div>
+            <h2>Dylan’s Gut Check</h2>
+            <p class="small">The informal read is useful. Don’t sanitize it too much.</p>
+          </div>
+        </div>
+
+        <label class="field">What do you personally think is HISA’s biggest recruitment problem right now?
+          <textarea name="biggest_problem"></textarea>
+        </label>
+
+        <label class="field" style="margin-top:14px;">What do you think would make the biggest difference fastest?
+          <textarea name="fastest_difference"></textarea>
+        </label>
+
+        <label class="field" style="margin-top:14px;">Anything else Alex should know before drafting the proposal for Barry?
+          <textarea name="anything_else"></textarea>
+        </label>
+      </section>
+    </form>
+
+    <div class="summary-card">
+      <h2>Generated Summary for Alex</h2>
+      <p class="small" style="color:#bdd6d9;">Click “Generate Summary” after filling out the worksheet, then copy or download this section.</p>
+      <textarea id="summary" readonly placeholder="Your generated summary will appear here."></textarea>
+      <div class="top-actions">
+        <button type="button" onclick="generateSummary()">Generate Summary</button>
+        <button type="button" class="secondary" onclick="copySummary()">Copy Summary</button>
+        <button type="button" class="secondary" onclick="downloadText()">Download Answers</button>
+        <button type="button" class="secondary" onclick="downloadBackup()">Download Backup</button>
+      </div>
+    </div>
+
+    <div class="footer">
+      Standalone worksheet. Answers autosave only in this browser and at this exact hosted URL unless exported or copied. Downloading answers or a backup is the safest handoff.
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('worksheet');
+    const savedMsg = document.getElementById('savedMsg');
+    const lastSaved = document.getElementById('lastSaved');
+    const backupFile = document.getElementById('backupFile');
+    const storageKey = 'hisa_ad_campaign_worksheet_v2';
+    let formTouched = false;
+    let exportedOrCopied = false;
+
+    function getValues() {
+      const data = {};
+      const elements = form.querySelectorAll('input, textarea, select');
+
+      elements.forEach(el => {
+        if (el.type === 'checkbox') {
+          if (!data[el.name]) data[el.name] = [];
+          if (el.checked) data[el.name].push(el.value);
+        } else {
+          data[el.name] = el.value.trim();
+        }
+      });
+
+      return data;
+    }
+
+    function setValues(data) {
+      const elements = form.querySelectorAll('input, textarea, select');
+
+      elements.forEach(el => {
+        if (el.type === 'checkbox') {
+          el.checked = Array.isArray(data[el.name]) && data[el.name].includes(el.value);
+        } else if (Object.prototype.hasOwnProperty.call(data, el.name)) {
+          el.value = data[el.name] || '';
+        }
+      });
+    }
+
+    function updateSavedStatus(isoString) {
+      if (!lastSaved) return;
+      if (!isoString) {
+        lastSaved.textContent = 'Autosave ready';
+        return;
+      }
+      const savedDate = new Date(isoString);
+      lastSaved.textContent = 'Last saved: ' + savedDate.toLocaleString();
+    }
+
+    function saveValues() {
+      const now = new Date().toISOString();
+      const payload = {
+        version: 2,
+        saved_at: now,
+        values: getValues()
+      };
+      localStorage.setItem(storageKey, JSON.stringify(payload));
+      updateSavedStatus(now);
+      formTouched = true;
+      exportedOrCopied = false;
+      savedMsg.style.display = 'inline-block';
+      setTimeout(() => savedMsg.style.display = 'none', 1000);
+    }
+
+    function loadValues() {
+      const saved = localStorage.getItem(storageKey) || localStorage.getItem('hisa_ad_campaign_worksheet_v1');
+      if (saved) {
+        try {
+          const parsed = JSON.parse(saved);
+          const values = parsed.values || parsed;
+          setValues(values);
+          updateSavedStatus(parsed.saved_at || null);
+        } catch (e) {
+          console.warn('Saved worksheet could not be loaded.');
+        }
+      }
+    }
+
+    function line(label, value) {
+      if (Array.isArray(value)) value = value.join(', ');
+      return `${label}: ${value && value.length ? value : '[blank]'}`;
+    }
+
+    function generateSummary() {
+      const d = getValues();
+
+      const summary = [
+        'HISA AD CAMPAIGN WORKSHEET',
+        'Generated: ' + new Date().toLocaleString(),
+        '',
+        '1. ENROLLMENT GOAL',
+        line('Current average students per semester', d.current_average),
+        line('Realistic max capacity per semester', d.max_capacity),
+        line('Ideal number of students next semester', d.ideal_next_semester),
+        line('Additional students needed for success', d.additional_success),
+        line('Target term', d.target_term),
+        '',
+        '2. STUDENT PROFILE',
+        line('Who usually enrolls', d.student_profile),
+        line('Most common age range', d.age_range),
+        line('Other student types', d.student_profile_other),
+        line('Students most excited by HISA', d.excited_students),
+        line('Repeat schools/departments/universities', d.repeat_schools),
+        '',
+        '3. BEST SELLING POINTS',
+        line('Strongest selling points', d.selling_points),
+        line('Other selling point', d.selling_points_other),
+        line('One-sentence description', d.one_sentence),
+        line('What students loved most', d.student_loved),
+        '',
+        '4. CREATIVE MATERIALS',
+        line('Promo video access', d.promo_video),
+        line('Can use interviews/testimonials in ads', d.testimonial_permission),
+        line('Available asset types', d.asset_types),
+        line('Asset owner / access', d.asset_owner),
+        '',
+        '5. WEBSITE AND FOLLOW-UP',
+        line('Ad traffic destination', d.traffic_destination),
+        line('Inquiry owner', d.inquiry_owner),
+        line('Response time', d.response_time),
+        line('Current lead list/spreadsheet', d.lead_list),
+        '',
+        '6. BUDGET COMFORT LEVEL',
+        line('Likely test campaign budget', d.budget_range),
+        line('Budget scope', d.budget_scope),
+        '',
+        '7. PRACTICAL CONSTRAINTS',
+        line('Things Barry does not want to do', d.dont_want),
+        line('Claims/language to avoid', d.claims_to_avoid),
+        line('Deadlines', d.deadlines),
+        '',
+        '8. DYLAN GUT CHECK',
+        line('Biggest recruitment problem', d.biggest_problem),
+        line('Fastest possible improvement', d.fastest_difference),
+        line('Anything else Alex should know', d.anything_else)
+      ].join('\n');
+
+      document.getElementById('summary').value = summary;
+      return summary;
+    }
+
+    async function copySummary() {
+      const text = generateSummary();
+      try {
+        await navigator.clipboard.writeText(text);
+        exportedOrCopied = true;
+        alert('Summary copied to clipboard.');
+      } catch (e) {
+        const summaryBox = document.getElementById('summary');
+        summaryBox.focus();
+        summaryBox.select();
+        alert('Copy failed automatically. The summary is selected — press Ctrl/Cmd+C.');
+      }
+    }
+
+    function downloadText() {
+      const text = generateSummary();
+      const blob = new Blob([text], {type: 'text/plain'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const date = new Date().toISOString().slice(0,10);
+      a.href = url;
+      a.download = `HISA-Ad-Campaign-Worksheet-Answers-${date}.txt`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      exportedOrCopied = true;
+    }
+
+    function downloadBackup() {
+      const now = new Date().toISOString();
+      const payload = {
+        form: 'HISA Ad Campaign Worksheet',
+        version: 2,
+        saved_at: now,
+        values: getValues()
+      };
+      const blob = new Blob([JSON.stringify(payload, null, 2)], {type: 'application/json'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      const date = now.slice(0,10);
+      a.href = url;
+      a.download = `HISA-Ad-Campaign-Worksheet-Backup-${date}.json`;
+      document.body.appendChild(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      exportedOrCopied = true;
+      saveValues();
+    }
+
+    function triggerImport() {
+      backupFile.click();
+    }
+
+    function importBackup(event) {
+      const file = event.target.files && event.target.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        try {
+          const parsed = JSON.parse(e.target.result);
+          const values = parsed.values || parsed;
+          setValues(values);
+          saveValues();
+          generateSummary();
+          alert('Backup imported successfully.');
+        } catch (err) {
+          alert('Could not import that backup file. Make sure it is the JSON backup from this worksheet.');
+        } finally {
+          backupFile.value = '';
+        }
+      };
+      reader.readAsText(file);
+    }
+
+    function clearForm() {
+      if (!confirm('Clear all saved answers in this browser?')) return;
+      localStorage.removeItem(storageKey);
+      form.reset();
+      document.getElementById('summary').value = '';
+    }
+
+    backupFile.addEventListener('change', importBackup);
+
+    window.addEventListener('beforeunload', function(e) {
+      if (formTouched && !exportedOrCopied) {
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    });
+
+    form.addEventListener('input', saveValues);
+    form.addEventListener('change', saveValues);
+    loadValues();
+  </script>
+</body>
+</html>
